@@ -1,3 +1,5 @@
+#recreate khan problem from unit distributions
+#and explain solution
 import pandas as pd 
 
 d = {'Region': ['Southeast', 'Southwest', 'West', 'Midwest', 'Northeast', 'Pacific'],\
@@ -8,8 +10,19 @@ d = {'Region': ['Southeast', 'Southwest', 'West', 'Midwest', 'Northeast', 'Pacif
 #print(d)
 df = pd.DataFrame(data=d)
 df.set_index('Region', inplace=True)
-#print(df.head())
-#give the conditional distribution of region for each political party
-#totals
+df.head()
 total_parties = df.sum()
-print(total_parties)
+total_parties
+total_regions = df.sum(axis=1)
+total_regions
+type(total_regions)
+type(total_parties)
+total_parties.sum() == total_regions.sum()
+total = total_regions.sum()
+total
+df["Regional_Prob"] = total_regions/total
+df.head()
+party_prob = total_parties/100
+party_prob.rename("party_prob", inplace=True)
+df = df.append(party_prob)
+df
